@@ -1,8 +1,6 @@
 # Market-Ad-Intelligence-AI-Engine
 An AI Agent for AIR (Audience, Inventory &amp; Reach) Data Analysis for advertising inventory &amp; performance. Goal is to Predict where, when, and on which platform an ad should air to maximize ROI, reach, and conversion.
 
-# Market Intelligence Analysis — README
-
 ## Overview
 This repository implements a lightweight market-intelligence pipeline that scans inventory, plans media buys, performs simple attribution and optimization, generates human-readable explanations using an LLM, and produces client reports (PPTX/PDF).
 
@@ -63,7 +61,6 @@ The graph's typed state is defined as [`graph.state.MarketState`](graph/state.py
 - Attribution
   - [attribution/markov_attribution.py](attribution/markov_attribution.py) — [`attribution.markov_attribution.markov_attribution`](attribution/markov_attribution.py)
 - LLM
-  - [llm/groq_client.py](llm/groq_client.py) — [`llm.groq_client.run_groq_query`](llm/groq_client.py)
   - [llm/llm_config.py](llm/llm_config.py) — local ChatOpenAI wrapper (unused in current explain agent)
 - Cache
   - [cache/redis_cache.py](cache/redis_cache.py) — [`cache.redis_cache.redis_client`](cache/redis_cache.py), [`cache.redis_cache.get_cache`](cache/redis_cache.py), [`cache.redis_cache.set_cache`](cache/redis_cache.py)
