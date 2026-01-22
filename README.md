@@ -4,6 +4,44 @@ An AI Agent for AIR (Audience, Inventory &amp; Reach) Data Analysis for advertis
 ## Overview
 This repository implements a lightweight market-intelligence pipeline that scans inventory, plans media buys, performs simple attribution and optimization, generates human-readable explanations using an LLM, and produces client reports (PPTX/PDF).
 
+Primary entry points:
+- FastAPI app: `app/main.py` (endpoints: `/recommend`, `/generate-report`)
+- Graph orchestration: `graph/media_graph.py`
+
+## Tech stack
+- Language & runtime
+  - Python 3.10+
+- Web & API
+  - FastAPI, Uvicorn
+- Data & ML
+  - pandas, numpy, scikit-learn, matplotlib / seaborn
+- Embeddings & Vector Search
+  - sentence-transformers / HuggingFace embeddings, FAISS
+- LLMs & Prompting
+  - Groq client wrapper (configurable to other providers)
+- Reinforcement / Optimization
+  - Custom BanditAgent (simple RL / bandit implementation)
+- Reporting
+  - python-pptx, reportlab (PPTX / PDF generation)
+- Infrastructure & services
+  - Redis (caching / realtime metrics), Docker (optional)
+- Dev & CI
+  - pytest, black, flake8, isort, GitHub Actions (recommended)
+- Packaging
+  - pip (`requirements.txt`) — optional: Poetry
+
+## Architecture & Structure
+High-level architecture
+- Orchestrator (graph): `graph/media_graph.py` executes a typed pipeline over a `MarketState` model. Each node consumes/produces state slices to keep components decoupled.
+- Data ingestion: realtime/periodic ingest writes performance metrics to Redis (`ingestion/realtime_ingest.py`, `cache/redis_cache.py`).
+- Market scanner: reads inventory/audience (CSV or data source), computes opportunity scores and ranks placements (`agents/market_scanner.py`).
+- Planner: converts ranked opportunities into an initial `media_plan` (`agents/planner_agent.py`).
+- Optimizer: budget allocation via a Bandit/RL agent (`rl/rl_agent.py`, `rl/rl_environment.py`, `rl/rl_trainer.py`).
+- Attribution: path-based / Markov attribution to assign conversion credit (`attribution/markov_attribution.py`).
+- Explainability: vector DB (FAISS + embeddings) stores contextual docs; explainer agent retrieves context and calls LLM to generate human explanations (`vector_store/vector_db.py`, `agents/explainer_agent.py`, `llm/groq_client.py`).
+- Reporting: composed charts and narrative exported as PPTX / PDF (`reports/report_generator.py`, `reports/ppt_template.py`, `reports/pdf_generator.py`).
+
+
 Key runtime entry points:
 - API: [`app.main.recommend`](app/main.py) and [`app.main.generate_client_report`](app/main.py) — FastAPI app.
 - Graph: [`graph.media_graph.build_graph`](graph/media_graph.py) — composes the processing graph.
