@@ -1,0 +1,4 @@
+campaign_id,client,platform,time_band,region,cost,reach,ctr,conversions,roi
+1,ClientA,YouTube,7-9,Tier2,50000,120000,0.045,320,1.42
+2,ClientA,TV,Prime,Tier1,80000,150000,0.021,210,1.10
+3,ClientB,Meta,6-8,Tier2,40000,90000,0.051,280,1.38

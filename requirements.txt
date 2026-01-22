@@ -1,0 +1,9 @@
+langchain
+langgraph
+faiss-cpu
+sentence-transformers
+redis
+pandas
+fastapi
+uvicorn
+streamlit
