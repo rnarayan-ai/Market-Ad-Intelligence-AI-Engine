@@ -46,7 +46,7 @@ Key runtime entry points:
 - API: [`app.main.recommend`](app/main.py) and [`app.main.generate_client_report`](app/main.py) — FastAPI app.
 - Graph: [`graph.media_graph.build_graph`](graph/media_graph.py) — composes the processing graph.
 
-## Architecture (high level)
+## Modules
 - A state graph (see [`graph.media_graph.build_graph`](graph/media_graph.py)) sequences modular nodes:
   - Market scanning: [`agents.market_scanner.scan_market`](agents/market_scanner.py)
   - Planning: [`agents.planner_agent.plan_media`](agents/planner_agent.py)
